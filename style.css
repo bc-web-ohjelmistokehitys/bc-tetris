@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2f2f2f 0%, #191919 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -15,12 +15,13 @@ body {
 }
 
 .game-container {
-    background: rgba(255, 255, 255, 0.95);
+    background: #ffffff;
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     max-width: 800px;
     width: 100%;
+    margin: 40px;
 }
 
 .game-header {
@@ -31,7 +32,7 @@ body {
 .game-header h1 {
     font-size: 3rem;
     font-weight: bold;
-    color: #2c3e50;
+    color: #191919;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -45,11 +46,11 @@ body {
 }
 
 .score-item {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #a8005d 0%, #69013b 100%);
     padding: 15px;
     border-radius: 10px;
     text-align: center;
-    color: white;
+    color: #ffffff;
     font-weight: bold;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -78,9 +79,9 @@ body {
 }
 
 #gameCanvas {
-    border: 3px solid #2c3e50;
+    border: 3px solid #69013b;
     border-radius: 10px;
-    background: #ecf0f1;
+    background: #ffffff;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
@@ -90,7 +91,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: #191919;
     display: none;
     justify-content: center;
     align-items: center;
@@ -103,13 +104,13 @@ body {
 
 .overlay-content {
     text-align: center;
-    color: white;
+    color: #ffffff;
 }
 
 .overlay-content h2 {
     font-size: 2rem;
     margin-bottom: 10px;
-    color: #e74c3c;
+    color: #a8005d;
 }
 
 .overlay-content p {
@@ -125,7 +126,7 @@ body {
 }
 
 .next-piece {
-    background: #f8f9fa;
+    background: #fce0d1;
     padding: 20px;
     border-radius: 15px;
     text-align: center;
@@ -134,18 +135,18 @@ body {
 
 .next-piece h3 {
     margin-bottom: 15px;
-    color: #2c3e50;
+    color: #191919;
     font-size: 1.2rem;
 }
 
 #nextCanvas {
     border: 2px solid #bdc3c7;
     border-radius: 8px;
-    background: white;
+    background: #ffffff;
 }
 
 .controls {
-    background: #f8f9fa;
+    background: #fce0d1;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -153,7 +154,7 @@ body {
 
 .controls h3 {
     margin-bottom: 15px;
-    color: #2c3e50;
+    color: #191919;
     font-size: 1.2rem;
     text-align: center;
 }
@@ -164,7 +165,7 @@ body {
     align-items: center;
     margin-bottom: 10px;
     padding: 8px 0;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid #ffffff;
 }
 
 .control-item:last-child {
@@ -173,8 +174,8 @@ body {
 }
 
 .key {
-    background: #2c3e50;
-    color: white;
+    background: #69013b;
+    color: #ffffff;
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.8rem;
@@ -185,7 +186,7 @@ body {
 
 .action {
     font-size: 0.9rem;
-    color: #495057;
+    color: #191919;
 }
 
 .game-footer {
@@ -206,23 +207,23 @@ body {
 }
 
 #startBtn {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    color: white;
+    background: linear-gradient(135deg, #a8005d 0%, #69013b 100%);
+    color: #ffffff;
 }
 
 #startBtn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(79, 172, 254, 0.3);
+    box-shadow: 0 6px 12px #69013b;
 }
 
 #pauseBtn {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-    color: white;
+    background: linear-gradient(135deg, #a8005d 0%, #69013b 100%);
+    color: #ffffff;
 }
 
 #pauseBtn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(250, 112, 154, 0.3);
+    box-shadow: 0 6px 12px #69013b;
 }
 
 #pauseBtn:disabled {
