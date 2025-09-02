@@ -183,17 +183,30 @@ class Tetris {
     }
     
     gameLoop() {
-        if (!this.gameRunning || this.gamePaused) return;
-        
-        this.update();
-        this.draw();
-        
-        setTimeout(() => {
-            if (this.gameRunning && !this.gamePaused) {
-                this.gameLoop();
+    if (!this.gameRunning) return;
+
+    const loop = () => {
+        if (!this.gameRunning) return;
+
+        if (!this.gamePaused) {
+            const now = Date.now();
+            if (!this.lastDropTime) this.lastDropTime = now;
+
+            const elapsed = now - this.lastDropTime;
+            if (elapsed > this.getDropSpeed()) {
+                this.update();
+                this.lastDropTime = now;
             }
-        }, this.getDropSpeed());
-    }
+
+            this.draw();
+        }
+
+        requestAnimationFrame(loop);
+    };
+
+    requestAnimationFrame(loop);
+}
+
     
     getDropSpeed() {
         return Math.max(50, 1000 - (this.level - 1) * 100);
