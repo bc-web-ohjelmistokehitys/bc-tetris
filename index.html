@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tetris Game</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    
+<link rel="stylesheet" href="style.css"></head>
 <body>
     <div class="game-container">
         <div class="game-header">
             <h1>TETRIS</h1>
+            
+        </div>
+        
+        <div class="game-main">
             <div class="score-board">
                 <div class="score-item">
                     <span class="label">Score:</span>
@@ -28,9 +30,6 @@
                     <span id="highScore">0</span>
                 </div>
             </div>
-        </div>
-        
-        <div class="game-main">
             <div class="game-area">
                 <canvas id="gameCanvas" width="300" height="600"></canvas>
                 <div class="game-overlay" id="gameOverlay">
@@ -75,10 +74,10 @@
         
         <div class="game-footer">
             <button id="startBtn" class="game-btn">Start Game</button>
-            <button id="pauseBtn" class="game-btn" disabled>Pause</button>
+            <button id="pauseBtn" class="game-btn">Pause</button>
         </div>
     </div>
     
-    <script src="tetris.js"></script>
-</body>
-</html>
+
+
+</body></html>
