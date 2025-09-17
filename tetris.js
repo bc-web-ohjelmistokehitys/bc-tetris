@@ -1,4 +1,3 @@
-
 (function(global){
   class TetrisEngine {
     constructor({width=12, height=20, blockSize=25} = {}) {
@@ -161,7 +160,8 @@
       this.gamePaused = false;
       this.gameOver = false;
 
-      this.highScore = parseInt(sessionStorage.getItem('tetrisHighScore')) || 0;
+      // Vaihda sessionStorage -> localStorage high scorelle
+      this.highScore = parseInt(localStorage.getItem('tetrisHighScore')) || 0;
 
       this.bindEvents();
       this.updateDisplay();
@@ -253,7 +253,8 @@
       this.gameRunning = false; this.gameOver = true;
       if (this.score > this.highScore){
         this.highScore = this.score;
-        sessionStorage.setItem('tetrisHighScore', String(this.highScore));
+        // Vaihda sessionStorage -> localStorage high scorelle
+        localStorage.setItem('tetrisHighScore', String(this.highScore));
       }
       document.getElementById('startBtn').disabled = false;
       const pauseBtn = document.getElementById('pauseBtn');
