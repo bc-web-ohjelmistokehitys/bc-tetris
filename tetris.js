@@ -160,8 +160,7 @@
       this.gamePaused = false;
       this.gameOver = false;
 
-      // Vaihda sessionStorage -> localStorage high scorelle
-      this.highScore = parseInt(localStorage.getItem('tetrisHighScore')) || 0;
+      this.highScore = parseInt(sessionStorage.getItem('tetrisHighScore')) || 0;
 
       this.bindEvents();
       this.updateDisplay();
@@ -238,7 +237,10 @@
       setTimeout(()=>{ if(this.gameRunning && !this.gamePaused) this.loopTick(); }, this.dropSpeedMs());
     }
 
-    dropSpeedMs(){ return Math.max(50, 1000 - (this.level - 1) * 100); }
+    dropSpeedMs(){ 
+      // Faster start: 500ms at level 1, speeds up by 100ms per level, min 50ms
+      return Math.max(50, 500 - (this.level - 1) * 100); 
+    }
 
     spawnNewPiece(){
       this.currentPiece = this.nextPiece;
@@ -253,8 +255,7 @@
       this.gameRunning = false; this.gameOver = true;
       if (this.score > this.highScore){
         this.highScore = this.score;
-        // Vaihda sessionStorage -> localStorage high scorelle
-        localStorage.setItem('tetrisHighScore', String(this.highScore));
+        sessionStorage.setItem('tetrisHighScore', String(this.highScore));
       }
       document.getElementById('startBtn').disabled = false;
       const pauseBtn = document.getElementById('pauseBtn');
@@ -354,3 +355,5 @@
     module.exports = { TetrisEngine };
   }
 })(typeof window !== 'undefined' ? window : globalThis);
+
+
