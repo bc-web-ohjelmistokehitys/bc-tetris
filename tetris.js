@@ -171,20 +171,39 @@
       document.getElementById('startBtn').addEventListener('click', () => this.startGame());
       document.getElementById('pauseBtn').addEventListener('click', () => this.togglePause());
 
-     
       document.addEventListener('keydown', (e) => {
-        if (e.code === 'KeyP'){ e.preventDefault(); this.togglePause(); return; }
+        if (e.code === 'KeyP') {
+          e.preventDefault();
+          this.togglePause();
+          return;
+        }
         if (!this.gameRunning || this.gamePaused) return;
 
-        switch(e.code){
-          case 'ArrowLeft': e.preventDefault(); this.move(-1,0); this.draw(); break;
-          case 'ArrowRight': e.preventDefault(); this.move(1,0); this.draw(); break;
-          case 'ArrowDown': e.preventDefault(); if(this.move(0,1)) this.draw(); break;
-          case 'ArrowUp': e.preventDefault(); this.rotate(); this.draw(); break;
+        let moved = false;
+        switch (e.code) {
+          case 'ArrowLeft':
+            e.preventDefault();
+            moved = this.move(-1, 0);
+            this.draw();
+            break;
+          case 'ArrowRight':
+            e.preventDefault();
+            moved = this.move(1, 0);
+            this.draw();
+            break;
+          case 'ArrowDown':
+            e.preventDefault();
+            moved = this.move(0, 1);
+            this.draw();
+            break;
+          case 'ArrowUp':
+            e.preventDefault();
+            this.rotate();
+            this.draw();
+            break;
           case 'Space':
             e.preventDefault();
             this.hardDrop();
-          
             this.lockPiece();
             const res = this.clearLinesAndScore();
             if (res.cleared > 0) this.updateDisplay();
