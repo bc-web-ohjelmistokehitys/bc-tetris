@@ -223,10 +223,13 @@
       this.currentPiece = this.getRandomPiece();
       this.nextPiece = this.getRandomPiece();
 
-      document.getElementById('startBtn').disabled = true;
-      const pauseBtn = document.getElementById('pauseBtn');
-      pauseBtn.disabled = false;
-      pauseBtn.textContent = 'Pausoi';
+  const startBtn = document.getElementById('startBtn');
+  startBtn.disabled = true;
+  startBtn.classList.add('disabled');
+  const pauseBtn = document.getElementById('pauseBtn');
+  pauseBtn.disabled = false;
+  pauseBtn.classList.remove('disabled');
+  pauseBtn.textContent = 'Pausoi';
 
       document.getElementById('gameOverlay').classList.remove('active');
       this.updateDisplay();
@@ -277,10 +280,13 @@
         this.highScore = this.score;
         sessionStorage.setItem('tetrisHighScore', String(this.highScore));
       }
-      document.getElementById('startBtn').disabled = false;
-      const pauseBtn = document.getElementById('pauseBtn');
-      pauseBtn.disabled = true;
-      pauseBtn.textContent = 'Pausoi';
+  const startBtn = document.getElementById('startBtn');
+  startBtn.disabled = false;
+  startBtn.classList.remove('disabled');
+  const pauseBtn = document.getElementById('pauseBtn');
+  pauseBtn.disabled = true;
+  pauseBtn.classList.add('disabled');
+  pauseBtn.textContent = 'Pausoi';
 
       document.getElementById('overlayTitle').textContent = 'Game Over!';
       document.getElementById('overlayMessage').innerHTML = `Final Score: ${this.score}<br>Press Start or P to play again`;
