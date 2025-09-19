@@ -234,10 +234,11 @@
     }
 
     togglePause(){
-      if (!this.gameRunning) return;
-      this.gamePaused = !this.gamePaused;
-      document.getElementById('pauseBtn').textContent = this.gamePaused ? 'Jatka' : 'Pausoi';
-      if (!this.gamePaused) this.loopTick();
+  if (!this.gameRunning) return;
+  this.gamePaused = !this.gamePaused;
+  document.getElementById('pauseBtn').textContent = this.gamePaused ? 'Jatka' : 'Pausoi';
+  this.draw(); 
+  if (!this.gamePaused) this.loopTick();
     }
 
     loopTick(){
@@ -291,7 +292,7 @@
       const ctx = this.ctx;
       ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
 
-      
+      // draw placed blocks
       for(let y=0;y<this.BOARD_HEIGHT;y++){
         for(let x=0;x<this.BOARD_WIDTH;x++){
           const cell = this.board[y][x];
@@ -299,9 +300,23 @@
         }
       }
       
+      // draw current falling piece
       if (this.currentPiece) this.drawPiece(ctx, this.currentPiece);
-     
+
+      // draw next piece
       this.drawNext();
+
+      // ✅ ADD THIS: Overlay when paused
+      if (this.gamePaused) {
+        ctx.fillStyle = "rgba(0,0,0,0.5)";
+        ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+        ctx.fillStyle = "white";
+        ctx.font = "bold 40px Arial";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("PAUSED", this.canvas.width / 2, this.canvas.height / 2);
+      }
     }
 
     drawBlock(ctx, x, y, color){
