@@ -21,8 +21,8 @@ class Tetris {
         this.gamePaused = false;
         this.gameOver = false;
         
-        // Session storage for high score
-        this.highScore = parseInt(sessionStorage.getItem('tetrisHighScore')) || 0;
+        // Persistent high score stored in localStorage
+        this.highScore = parseInt(localStorage.getItem('tetrisHighScore')) || 0;
         
         // Initialize
         this.initBoard();
@@ -120,8 +120,9 @@ class Tetris {
         
         // Keyboard events
         document.addEventListener('keydown', (e) => {
-            if (!this.gameRunning || this.gamePaused) return;
-            
+            if (!this.gameRunning) return;
+            if (this.gamePaused && e.code !== 'KeyP') return;
+
             switch(e.code) {
                 case 'ArrowLeft':
                     e.preventDefault();
@@ -165,9 +166,31 @@ class Tetris {
         
         document.getElementById('startBtn').disabled = true;
         document.getElementById('pauseBtn').disabled = false;
+        document.getElementById('pauseBtn').textContent = 'Pause';
         document.getElementById('gameOverlay').classList.remove('active');
+        document.getElementById('overlayTitle').textContent = '';
+        document.getElementById('overlayMessage').textContent = '';
         
         this.gameLoop();
+    }
+
+    updatePauseDisplay() {
+        const overlay = document.getElementById('gameOverlay');
+        const overlayTitle = document.getElementById('overlayTitle');
+        const overlayMessage = document.getElementById('overlayMessage');
+
+        if (this.gamePaused) {
+            overlayTitle.textContent = 'Paused';
+            overlayMessage.textContent = 'Press P or Resume to continue';
+            overlay.classList.add('active');
+            return;
+        }
+
+        if (!this.gameOver) {
+            overlay.classList.remove('active');
+            overlayTitle.textContent = '';
+            overlayMessage.textContent = '';
+        }
     }
     
     togglePause() {
@@ -176,6 +199,7 @@ class Tetris {
         this.gamePaused = !this.gamePaused;
         const pauseBtn = document.getElementById('pauseBtn');
         pauseBtn.textContent = this.gamePaused ? 'Resume' : 'Pause';
+        this.updatePauseDisplay();
         
         if (!this.gamePaused) {
             this.gameLoop();
@@ -183,7 +207,7 @@ class Tetris {
     }
     
     gameLoop() {
-        if (!this.gameRunning || this.gamePaused) return;
+        if (!this.gameRunning || this.gamePaused || !this.currentPiece) return;
         
         this.update();
         this.draw();
@@ -196,7 +220,7 @@ class Tetris {
     }
     
     getDropSpeed() {
-        return Math.max(50, 1000 - (this.level - 1) * 100);
+        return Math.max(110, 700 - (this.level - 1) * 60);
     }
     
     update() {
@@ -215,6 +239,8 @@ class Tetris {
     }
     
     movePiece(dx, dy) {
+        if (!this.currentPiece) return false;
+
         const newX = this.currentPiece.x + dx;
         const newY = this.currentPiece.y + dy;
         
@@ -249,8 +275,22 @@ class Tetris {
     }
     
     hardDrop() {
+        if (!this.currentPiece) return;
+
+        let cellsDropped = 0;
         while (this.movePiece(0, 1)) {
-            this.score += 2;
+            cellsDropped++;
+        }
+
+        this.score += cellsDropped * 2;
+        this.placePiece();
+        this.clearLines();
+        this.spawnNewPiece();
+        this.draw();
+        this.updateDisplay();
+
+        if (this.currentPiece && this.isGameOver()) {
+            this.endGame();
         }
     }
     
@@ -298,12 +338,13 @@ class Tetris {
         }
         
         if (linesCleared > 0) {
+            const scoreBeforeLevelUpdate = this.level;
             this.lines += linesCleared;
             this.level = Math.floor(this.lines / 10) + 1;
             
             // Scoring: more points for clearing multiple lines at once
             const lineScores = [0, 100, 300, 500, 800];
-            this.score += lineScores[linesCleared] * this.level;
+            this.score += lineScores[linesCleared] * scoreBeforeLevelUpdate;
             
             this.updateDisplay();
         }
@@ -334,7 +375,7 @@ class Tetris {
         // Update high score
         if (this.score > this.highScore) {
             this.highScore = this.score;
-            sessionStorage.setItem('tetrisHighScore', this.highScore.toString());
+            localStorage.setItem('tetrisHighScore', this.highScore.toString());
         }
         
         document.getElementById('startBtn').disabled = false;
@@ -436,7 +477,18 @@ class Tetris {
     }
 }
 
-// Initialize the game when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    new Tetris();
-});
+if (typeof window !== 'undefined') {
+    window.Tetris = Tetris;
+
+    if (!window.__tetrisInitialized) {
+        window.__tetrisInitialized = true;
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                new Tetris();
+            });
+        } else {
+            new Tetris();
+        }
+    }
+}
