@@ -257,9 +257,12 @@ class Tetris {
   }
 
   hardDrop() {
+    let droppedRows = 0;
     while (this.movePiece(0, 1)) {
-      this.score += 2;
+      droppedRows++;
     }
+    this.score += droppedRows * 2;
+    this.updateDisplay();
   }
 
   isValidMove(shape, x, y) {
