@@ -6,16 +6,16 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #69013b;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #333;
+    color: #191919;
 }
 
 .game-container {
-    background: rgba(255, 255, 255, 0.95);
+    background: #ffffff;
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -31,7 +31,7 @@ body {
 .game-header h1 {
     font-size: 3rem;
     font-weight: bold;
-    color: #2c3e50;
+    color: #69013b;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -45,7 +45,7 @@ body {
 }
 
 .score-item {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: #69013b;
     padding: 15px;
     border-radius: 10px;
     text-align: center;
@@ -78,9 +78,9 @@ body {
 }
 
 #gameCanvas {
-    border: 3px solid #2c3e50;
+    border: 3px solid #69013b;
     border-radius: 10px;
-    background: #ecf0f1;
+    background: #fce0d1;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
@@ -125,7 +125,7 @@ body {
 }
 
 .next-piece {
-    background: #f8f9fa;
+    background: #fce0d1;
     padding: 20px;
     border-radius: 15px;
     text-align: center;
@@ -139,13 +139,13 @@ body {
 }
 
 #nextCanvas {
-    border: 2px solid #bdc3c7;
+    border: 2px solid #69013b;
     border-radius: 8px;
     background: white;
 }
 
 .controls {
-    background: #f8f9fa;
+    background: #fce0d1;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -173,7 +173,7 @@ body {
 }
 
 .key {
-    background: #2c3e50;
+    background: #69013b;
     color: white;
     padding: 4px 8px;
     border-radius: 4px;
@@ -206,7 +206,7 @@ body {
 }
 
 #startBtn {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: #69013b;
     color: white;
 }
 
@@ -216,7 +216,7 @@ body {
 }
 
 #pauseBtn {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    background: #191919;
     color: white;
 }
 
